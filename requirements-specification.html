@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirements Specification Document - QuickFix Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.4;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            font-size: 12px;
+        }
+
+        .document {
+            max-width: 11in;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 8.5in;
+        }
+
+        .page {
+            padding: 1in;
+            page-break-after: always;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 14pt;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 10pt;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h3 {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        .section h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .requirements-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 10pt;
+        }
+
+        .requirements-table th,
+        .requirements-table td {
+            border: 1px solid #bdc3c7;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .requirements-table th {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+
+        .req-id {
+            font-weight: bold;
+            color: #e74c3c;
+            width: 80px;
+        }
+
+        .priority-high {
+            background-color: #e74c3c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9pt;
+        }
+
+        .priority-medium {
+            background-color: #f39c12;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9pt;
+        }
+
+        .priority-low {
+            background-color: #27ae60;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9pt;
+        }
+
+        .system-arch {
+            border: 2px solid #3498db;
+            padding: 1rem;
+            background-color: #ecf8ff;
+            margin: 1rem 0;
+        }
+
+        .system-arch h4 {
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .component-box {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 0.5rem;
+            margin: 0.5rem;
+            border-radius: 4px;
+            font-size: 9pt;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .integration-flow {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 10pt;
+            color: #7f8c8d;
+        }
+
+        .api-spec {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6c757d;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .api-spec h5 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            margin-bottom: 0.5rem;
+            color: #495057;
+        }
+
+        .code-block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 9pt;
+            overflow-x: auto;
+        }
+
+        .technical-note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .technical-note h5 {
+            color: #856404;
+            font-size: 11pt;
+            margin-bottom: 0.5rem;
+        }
+
+        .deliverable-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 9pt;
+            font-weight: bold;
+        }
+
+        .status-complete {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-progress {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status-pending {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+            .document {
+                box-shadow: none;
+                margin: 0;
+            }
+            .back-link {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="page">
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+            
+            <div class="header">
+                <h1>Requirements Specification Document</h1>
+                <h2>Customer Data Platform (CDP) - Technical Specifications</h2>
+            </div>
+
+            <div class="section">
+                <h3>1. Executive Summary</h3>
+                <p style="font-size: 11pt; text-align: justify; line-height: 1.6;">
+                    This Requirements Specification Document (RSD) defines the technical and functional requirements for implementing a Customer Data Platform (CDP) to unify QuickFix's fragmented data systems. The CDP will eliminate data silos across Marketing, Billing, Support, and Backend Operations, enabling real-time customer analytics and data-driven decision making.
+                </p>
+                
+                <div class="technical-note">
+                    <h5>Project Scope & Objectives</h5>
+                    <ul style="margin-left: 1rem; font-size: 10pt;">
+                        <li><strong>Primary Goal:</strong> Integrate 4 disconnected systems into unified customer data architecture</li>
+                        <li><strong>Success Criteria:</strong> 80% reduction in data fragmentation, real-time customer profitability tracking</li>
+                        <li><strong>Timeline:</strong> 12-month phased implementation approach</li>
+                        <li><strong>Budget Impact:</strong> ROI positive within 18 months through operational efficiency gains</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>2. Current State Analysis</h3>
+                <p style="font-size: 11pt; margin-bottom: 1rem;">
+                    <strong>Existing System Landscape:</strong>
+                </p>
+                <table class="requirements-table">
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Current Function</th>
+                            <th>Data Isolation Issues</th>
+                            <th>Integration Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Marketing Automation</strong></td>
+                            <td>Lead capture, campaign management</td>
+                            <td>No customer lifecycle visibility</td>
+                            <td><span class="priority-high">HIGH</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Billing System</strong></td>
+                            <td>Invoice generation, payment processing</td>
+                            <td>No cost-to-serve data integration</td>
+                            <td><span class="priority-high">HIGH</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Support Platform</strong></td>
+                            <td>Ticket management, technician dispatch</td>
+                            <td>No customer history context</td>
+                            <td><span class="priority-medium">MEDIUM</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Backend Operations</strong></td>
+                            <td>Reporting, analytics, admin functions</td>
+                            <td>Manual data aggregation required</td>
+                            <td><span class="priority-medium">MEDIUM</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3>3. System Architecture Requirements</h3>
+                
+                <div class="system-arch">
+                    <h4>Proposed CDP Architecture</h4>
+                    <div style="text-align: center;">
+                        <div class="component-box">Marketing APIs</div>
+                        <div class="component-box">Billing APIs</div>
+                        <div class="component-box">Support APIs</div>
+                        <div class="component-box">Operations APIs</div>
+                    </div>
+                    <div class="integration-flow">↓ Real-time API Integration ↓</div>
+                    <div style="text-align: center;">
+                        <div class="component-box" style="background-color: #e74c3c; min-width: 300px;">
+                            Customer Data Platform (CDP)<br>
+                            <small>Unified Customer 360° View</small>
+                        </div>
+                    </div>
+                    <div class="integration-flow">↓ Analytics & Insights ↓</div>
+                    <div style="text-align: center;">
+                        <div class="component-box">Real-time Dashboard</div>
+                        <div class="component-box">Predictive Analytics</div>
+                        <div class="component-box">Automated Workflows</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="section">
+                <h3>4. Functional Requirements</h3>
+                
+                <table class="requirements-table">
+                    <thead>
+                        <tr>
+                            <th>Req ID</th>
+                            <th>Requirement Description</th>
+                            <th>Priority</th>
+                            <th>Acceptance Criteria</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="req-id">FR-001</td>
+                            <td><strong>Customer Identity Resolution</strong><br>System must create unified customer profiles across all touchpoints</td>
+                            <td><span class="priority-high">HIGH</span></td>
+                            <td>99.5% accuracy in customer matching across systems</td>
+                        </tr>
+                        <tr>
+                            <td class="req-id">FR-002</td>
+                            <td><strong>Real-time Data Synchronization</strong><br>Customer data updates must propagate across all systems within 5 seconds</td>
+                            <td><span class="priority-high">HIGH</span></td>
+                            <td>Sub-5 second data consistency across all platforms</td>
+                        </tr>
+                        <tr>
+                            <td class="req-id">FR-003</td>
+                            <td><strong>Customer Lifetime Value Calculation</strong><br>Real-time CLV computation incorporating service costs and revenue</td>
+                            <td><span class="priority-high">HIGH</span></td>
+                            <td>Accurate CLV calculation with 95% precision</td>
+                        </tr>
+                        <tr>
+                            <td class="req-id">FR-004</td>
+                            <td><strong>Automated Workflow Triggers</strong><br>System must trigger actions based on customer behavior patterns</td>
+                            <td><span class="priority-medium">MEDIUM</span></td>
+                            <td>Configurable business rules with 98% reliability</td>
+                        </tr>
+                        <tr>
+                            <td class="req-id">FR-005</td>
+                            <td><strong>Customer 360° Dashboard</strong><br>Unified view of customer interactions, billing, and support history</td>
+                            <td><span class="priority-medium">MEDIUM</span></td>
+                            <td>Complete customer timeline in under 3 seconds load time</td>
+                        </tr>
+                        <tr>
+                            <td class="req-id">FR-006</td>
+                            <td><strong>Predictive Churn Analytics</strong><br>Machine learning models to predict customer churn probability</td>
+                            <td><span class="priority-low">LOW</span></td>
+                            <td>Churn prediction accuracy of 80% or higher</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3>5. Technical Requirements</h3>
+                
+                <h4>5.1 API Specifications</h4>
+                <div class="api-spec">
+                    <h5>Customer Profile API Endpoint</h5>
+                    <div class="code-block">
+GET /api/v1/customers/{customer_id}/profile
+Content-Type: application/json
+Authorization: Bearer {token}
+
+Response:
+{
+  "customer_id": "12345",
+  "unified_profile": {
+    "personal_info": {...},
+    "billing_summary": {
+      "total_revenue": 1250.00,
+      "clv": 2847.50,
+      "payment_status": "current"
+    },
+    "service_history": [...],
+    "engagement_metrics": {...}
+  }
+}
+                    </div>
+                </div>
+
+                <h4>5.2 Performance Requirements</h4>
+                <table class="requirements-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Requirement</th>
+                            <th>Measurement Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>API Response Time</strong></td>
+                            <td>&lt; 200ms for 95% of requests</td>
+                            <td>Application Performance Monitoring</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Freshness</strong></td>
+                            <td>&lt; 5 seconds for critical updates</td>
+                            <td>Event timestamp tracking</td>
+                        </tr>
+                        <tr>
+                            <td><strong>System Availability</strong></td>
+                            <td>99.9% uptime (8.76 hours downtime/year)</td>
+                            <td>Infrastructure monitoring dashboards</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Accuracy</strong></td>
+                            <td>99.95% data consistency across systems</td>
+                            <td>Automated data validation checks</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>5.3 Security & Compliance</h4>
+                <div class="technical-note">
+                    <h5>Data Protection Requirements</h5>
+                    <ul style="margin-left: 1rem; font-size: 10pt;">
+                        <li><strong>Encryption:</strong> AES-256 encryption for data at rest, TLS 1.3 for data in transit</li>
+                        <li><strong>Access Control:</strong> Role-based access control (RBAC) with multi-factor authentication</li>
+                        <li><strong>Audit Logging:</strong> Complete audit trail of all data access and modifications</li>
+                        <li><strong>Compliance:</strong> GDPR compliance for EU customers, SOC 2 Type II certification required</li>
+                        <li><strong>Data Retention:</strong> Configurable retention policies with automated data purging</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="section">
+                <h3>6. Implementation Roadmap</h3>
+                
+                <table class="requirements-table">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Timeline</th>
+                            <th>Deliverables</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Phase 1: Foundation</strong></td>
+                            <td>Months 1-3</td>
+                            <td>
+                                • CDP platform selection<br>
+                                • Data architecture design<br>
+                                • API specification finalization
+                            </td>
+                            <td><span class="deliverable-status status-complete">COMPLETE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 2: Core Integration</strong></td>
+                            <td>Months 4-6</td>
+                            <td>
+                                • Marketing system integration<br>
+                                • Billing system connection<br>
+                                • Customer identity resolution
+                            </td>
+                            <td><span class="deliverable-status status-progress">IN PROGRESS</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 3: Advanced Features</strong></td>
+                            <td>Months 7-9</td>
+                            <td>
+                                • Support system integration<br>
+                                • Real-time analytics dashboard<br>
+                                • Automated workflow engine
+                            </td>
+                            <td><span class="deliverable-status status-pending">PENDING</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 4: Optimization</strong></td>
+                            <td>Months 10-12</td>
+                            <td>
+                                • Predictive analytics models<br>
+                                • Performance optimization<br>
+                                • User training & documentation
+                            </td>
+                            <td><span class="deliverable-status status-pending">PENDING</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3>7. Success Metrics & KPIs</h3>
+                
+                <table class="requirements-table">
+                    <thead>
+                        <tr>
+                            <th>Metric Category</th>
+                            <th>Current State</th>
+                            <th>Target State</th>
+                            <th>Measurement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Data Integration</strong></td>
+                            <td>4 disconnected systems</td>
+                            <td>Single unified platform</td>
+                            <td>80% reduction in data silos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operational Efficiency</strong></td>
+                            <td>Weekly manual reports</td>
+                            <td>Real-time dashboards</td>
+                            <td>90% faster insights generation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customer Insights</strong></td>
+                            <td>No CLV visibility</td>
+                            <td>Real-time CLV tracking</td>
+                            <td>100% customer profitability visibility</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Decision Making</strong></td>
+                            <td>Intuition-based pricing</td>
+                            <td>Data-driven strategies</td>
+                            <td>40% improvement in pricing accuracy</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3>8. Risk Assessment & Mitigation</h3>
+                <div class="technical-note">
+                    <h5>Critical Risk Factors</h5>
+                    <ul style="margin-left: 1rem; font-size: 10pt;">
+                        <li><strong>Data Migration Risk:</strong> Potential data loss during system integration
+                            <br><em>Mitigation:</em> Comprehensive backup strategy, phased migration approach</li>
+                        <li><strong>System Downtime:</strong> Business disruption during implementation
+                            <br><em>Mitigation:</em> Blue-green deployment strategy, rollback procedures</li>
+                        <li><strong>User Adoption:</strong> Resistance to new workflows and interfaces
+                            <br><em>Mitigation:</em> Change management program, comprehensive training</li>
+                        <li><strong>Technical Complexity:</strong> Integration challenges with legacy systems
+                            <br><em>Mitigation:</em> Proof of concept development, experienced integration team</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

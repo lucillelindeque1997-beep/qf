@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Economics Model - QuickFix Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.4;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            font-size: 12px;
+        }
+
+        .document {
+            max-width: 11in;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 8.5in;
+        }
+
+        .page {
+            padding: 1in;
+            page-break-after: always;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 14pt;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 10pt;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .spreadsheet-container {
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+
+        .spreadsheet {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Courier New', monospace;
+            font-size: 11pt;
+        }
+
+        .spreadsheet th,
+        .spreadsheet td {
+            border: 1px solid #bdc3c7;
+            padding: 8px;
+            text-align: right;
+        }
+
+        .spreadsheet th {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .spreadsheet .row-header {
+            background-color: #ecf0f1;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .spreadsheet .category-header {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .spreadsheet .formula-cell {
+            background-color: #e8f6f3;
+        }
+
+        .spreadsheet .result-cell {
+            background-color: #fdf2e9;
+            font-weight: bold;
+        }
+
+        .assumptions {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-left: 4px solid #3498db;
+            margin: 2rem 0;
+        }
+
+        .assumptions h3 {
+            font-size: 12pt;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .assumptions ul {
+            margin-left: 1rem;
+        }
+
+        .assumptions li {
+            margin-bottom: 0.25rem;
+            font-size: 10pt;
+        }
+
+        .insights {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-left: 4px solid #e74c3c;
+            margin: 2rem 0;
+        }
+
+        .insights h3 {
+            font-size: 12pt;
+            margin-bottom: 0.5rem;
+            color: #c0392b;
+        }
+
+        .insights p {
+            font-size: 10pt;
+            margin-bottom: 0.5rem;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+            .document {
+                box-shadow: none;
+                margin: 0;
+            }
+            .back-link {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="page">
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+            
+            <div class="header">
+                <h1>Unit Economics Model</h1>
+                <h2>QuickFix - Customer Profitability Analysis Framework</h2>
+            </div>
+
+            <div class="assumptions">
+                <h3>Key Assumptions & Methodology</h3>
+                <ul>
+                    <li>Analysis based on 12-month customer lifecycle</li>
+                    <li>Service costs include technician wages, travel, and overhead allocation</li>
+                    <li>Customer acquisition costs derived from digital marketing spend analysis</li>
+                    <li>Retention rates calculated from historical customer data</li>
+                    <li>Premium service tier introduced to improve unit economics</li>
+                </ul>
+            </div>
+
+            <div class="spreadsheet-container">
+                <table class="spreadsheet">
+                    <thead>
+                        <tr>
+                            <th style="width: 250px;">Metric</th>
+                            <th>Current State</th>
+                            <th>Future State</th>
+                            <th>Improvement</th>
+                            <th>Formula/Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category-header" colspan="5">REVENUE METRICS</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Average Service Price</td>
+                            <td>$85.00</td>
+                            <td class="formula-cell">$95.00</td>
+                            <td class="result-cell">+11.8%</td>
+                            <td>Value-based pricing implementation</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Services per Customer/Month</td>
+                            <td>1.2</td>
+                            <td class="formula-cell">1.8</td>
+                            <td class="result-cell">+50.0%</td>
+                            <td>Preventive maintenance programs</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Monthly Revenue per Customer</td>
+                            <td class="formula-cell">$102.00</td>
+                            <td class="formula-cell">$171.00</td>
+                            <td class="result-cell">+67.6%</td>
+                            <td>=Price × Services/Month</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Annual Customer Value</td>
+                            <td class="formula-cell">$1,224.00</td>
+                            <td class="formula-cell">$2,052.00</td>
+                            <td class="result-cell">+67.6%</td>
+                            <td>=Monthly Revenue × 12</td>
+                        </tr>
+
+                        <tr>
+                            <td class="category-header" colspan="5">COST STRUCTURE</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Direct Service Cost</td>
+                            <td>$35.00</td>
+                            <td class="formula-cell">$38.00</td>
+                            <td class="result-cell">+8.6%</td>
+                            <td>Labor + materials + travel</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Customer Acquisition Cost (CAC)</td>
+                            <td>$125.00</td>
+                            <td class="formula-cell">$85.00</td>
+                            <td class="result-cell">-32.0%</td>
+                            <td>Digital marketing optimization</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Monthly Retention Cost</td>
+                            <td>$8.00</td>
+                            <td class="formula-cell">$12.00</td>
+                            <td class="result-cell">+50.0%</td>
+                            <td>CRM + support + engagement</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Annual Retention Cost</td>
+                            <td class="formula-cell">$96.00</td>
+                            <td class="formula-cell">$144.00</td>
+                            <td class="result-cell">+50.0%</td>
+                            <td>=Monthly Retention × 12</td>
+                        </tr>
+
+                        <tr>
+                            <td class="category-header" colspan="5">PROFITABILITY ANALYSIS</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Gross Margin per Service</td>
+                            <td class="formula-cell">$50.00</td>
+                            <td class="formula-cell">$57.00</td>
+                            <td class="result-cell">+14.0%</td>
+                            <td>=Service Price - Direct Cost</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Gross Margin %</td>
+                            <td class="result-cell">58.8%</td>
+                            <td class="result-cell">60.0%</td>
+                            <td class="result-cell">+1.2pp</td>
+                            <td>=Gross Margin / Service Price</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Annual Gross Profit</td>
+                            <td class="formula-cell">$720.00</td>
+                            <td class="formula-cell">$1,231.20</td>
+                            <td class="result-cell">+71.0%</td>
+                            <td>=Gross Margin × Services × 12</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Customer Lifetime Value (CLV)</td>
+                            <td class="result-cell">$499.00</td>
+                            <td class="result-cell">$1,002.20</td>
+                            <td class="result-cell">+100.8%</td>
+                            <td>=Annual Gross Profit - CAC - Retention</td>
+                        </tr>
+
+                        <tr>
+                            <td class="category-header" colspan="5">KEY RATIOS</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">CLV:CAC Ratio</td>
+                            <td class="result-cell">3.99:1</td>
+                            <td class="result-cell">11.79:1</td>
+                            <td class="result-cell">+195.2%</td>
+                            <td>Target: >3:1 (Excellent: >5:1)</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Payback Period (months)</td>
+                            <td class="result-cell">2.5</td>
+                            <td class="result-cell">1.2</td>
+                            <td class="result-cell">-52.0%</td>
+                            <td>=CAC / Monthly Gross Profit</td>
+                        </tr>
+                        <tr>
+                            <td class="row-header">Monthly Profit per Customer</td>
+                            <td class="result-cell">$41.58</td>
+                            <td class="result-cell">$83.52</td>
+                            <td class="result-cell">+100.8%</td>
+                            <td>=(CLV + CAC + Annual Retention)/12</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="insights">
+                <h3>Strategic Insights</h3>
+                <p><strong>Revenue Growth:</strong> 67.6% increase in customer value through value-based pricing (+11.8%) and service frequency optimization (+50%).</p>
+                <p><strong>Cost Optimization:</strong> 32% reduction in CAC through digital marketing efficiency, while maintaining quality through strategic retention investment (+50%).</p>
+                <p><strong>Profitability Improvement:</strong> CLV doubled to $1,002, with CLV:CAC ratio improving from 4:1 to 12:1 (well above industry benchmark of 3:1).</p>
+                <p><strong>Cash Flow:</strong> Payback period reduced from 2.5 to 1.2 months, significantly improving cash flow dynamics and scalability potential.</p>
+            </div>
+
+            <div class="assumptions">
+                <h3>Implementation Priorities</h3>
+                <ul>
+                    <li><strong>Phase 1:</strong> Implement value-based pricing model (immediate 11.8% revenue increase)</li>
+                    <li><strong>Phase 2:</strong> Launch preventive maintenance programs (drive service frequency to 1.8x/month)</li>
+                    <li><strong>Phase 3:</strong> Optimize digital marketing channels (reduce CAC by 32%)</li>
+                    <li><strong>Phase 4:</strong> Enhanced customer retention programs (justify increased retention investment)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

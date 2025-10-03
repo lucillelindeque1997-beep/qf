@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-Month Digital Marketing Plan - QuickFix Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.4;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            font-size: 12px;
+        }
+
+        .document {
+            max-width: 11in;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 8.5in;
+        }
+
+        .page {
+            padding: 1in;
+            page-break-after: always;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 14pt;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 10pt;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h3 {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        .icp-profile {
+            background-color: #e8f6f3;
+            border-left: 4px solid #27ae60;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .icp-profile h4 {
+            color: #27ae60;
+            font-size: 13pt;
+            margin-bottom: 1rem;
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .persona-card {
+            border: 1px solid #bdc3c7;
+            padding: 1rem;
+            background-color: white;
+        }
+
+        .persona-name {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .channel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 10pt;
+        }
+
+        .channel-table th,
+        .channel-table td {
+            border: 1px solid #bdc3c7;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .channel-table th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+
+        .budget-allocation {
+            background-color: #f8f9fa;
+            border: 2px solid #6c757d;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 11pt;
+        }
+
+        .budget-bar {
+            width: 60%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+
+        .budget-fill {
+            height: 100%;
+            background-color: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .timeline-container {
+            margin: 1rem 0;
+        }
+
+        .quarter {
+            border: 1px solid #dee2e6;
+            margin-bottom: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        .quarter-header {
+            background-color: #495057;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+
+        .quarter-content {
+            padding: 1rem;
+        }
+
+        .campaign-box {
+            background-color: white;
+            border-left: 4px solid #17a2b8;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .campaign-title {
+            font-weight: bold;
+            color: #17a2b8;
+            font-size: 11pt;
+            margin-bottom: 0.25rem;
+        }
+
+        .campaign-details {
+            font-size: 9pt;
+            color: #6c757d;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        .metric-value {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #e74c3c;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 9pt;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+
+        .roi-projection {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .roi-projection h4 {
+            color: #856404;
+            font-size: 12pt;
+            margin-bottom: 0.5rem;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+            .document {
+                box-shadow: none;
+                margin: 0;
+            }
+            .back-link {
+                display: none;
+            }
+            .persona-grid {
+                grid-template-columns: 1fr;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="page">
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+            
+            <div class="header">
+                <h1>12-Month Digital Marketing Plan</h1>
+                <h2>QuickFix - Strategic Customer Acquisition Roadmap</h2>
+            </div>
+
+            <div class="section">
+                <h3>1. Strategic Overview & Objectives</h3>
+                <p style="font-size: 11pt; text-align: justify; line-height: 1.6; margin-bottom: 1rem;">
+                    This comprehensive digital marketing strategy focuses exclusively on acquiring high-value customers within QuickFix's newly defined Ideal Customer Profile (ICP). The plan eliminates wasteful spend on unprofitable segments and concentrates resources on the top 35% of profitable customer segments identified through unit economics analysis.
+                </p>
+
+                <div class="roi-projection">
+                    <h4>Expected Marketing ROI Improvements</h4>
+                    <ul style="margin-left: 1rem; font-size: 10pt;">
+                        <li><strong>Customer Acquisition Cost (CAC) Reduction:</strong> 32% decrease from $125 to $85</li>
+                        <li><strong>Customer Lifetime Value (CLV) Focus:</strong> Target customers with $1,002+ CLV potential</li>
+                        <li><strong>Marketing Efficiency:</strong> 65% improvement in cost-per-acquisition through ICP targeting</li>
+                        <li><strong>Payback Period:</strong> Reduction from 2.5 months to 1.2 months</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>2. Ideal Customer Profile (ICP) Definition</h3>
+                
+                <div class="icp-profile">
+                    <h4>Primary Target Segment: Tech-Forward Homeowners</h4>
+                    <div class="persona-grid">
+                        <div class="persona-card">
+                            <div class="persona-name">"Smart Home Sam"</div>
+                            <ul style="font-size: 10pt; margin-left: 1rem;">
+                                <li>Age: 35-55 years old</li>
+                                <li>Income: $75,000+ annually</li>
+                                <li>Tech adoption: Early majority</li>
+                                <li>Home value: $300,000+</li>
+                                <li>Smart devices: 5+ connected devices</li>
+                            </ul>
+                        </div>
+                        <div class="persona-card">
+                            <div class="persona-name">"Busy Professional Bella"</div>
+                            <ul style="font-size: 10pt; margin-left: 1rem;">
+                                <li>Age: 28-45 years old</li>
+                                <li>Income: $60,000+ annually</li>
+                                <li>Lifestyle: Time-constrained</li>
+                                <li>Values: Convenience, reliability</li>
+                                <li>Pain point: DIY tech troubleshooting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="font-size: 10pt; font-style: italic; color: #6c757d;">
+                    <strong>ICP Validation:</strong> These segments represent customers with 40% higher CLV and 50% lower churn rates compared to the general customer base.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3>3. Channel Strategy & Budget Allocation</h3>
+                
+                <div class="budget-allocation">
+                    <h4 style="text-align: center; margin-bottom: 1rem; color: #495057;">Annual Marketing Budget: $180,000</h4>
+                    
+                    <div class="budget-item">
+                        <span><strong>Google Ads (Search)</strong></span>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width: 35%;"></div>
+                        </div>
+                        <span><strong>$63,000 (35%)</strong></span>
+                    </div>
+                    
+                    <div class="budget-item">
+                        <span><strong>Facebook/Instagram Ads</strong></span>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width: 25%;"></div>
+                        </div>
+                        <span><strong>$45,000 (25%)</strong></span>
+                    </div>
+                    
+                    <div class="budget-item">
+                        <span><strong>Content Marketing</strong></span>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width: 20%;"></div>
+                        </div>
+                        <span><strong>$36,000 (20%)</strong></span>
+                    </div>
+                    
+                    <div class="budget-item">
+                        <span><strong>Email Marketing</strong></span>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width: 10%;"></div>
+                        </div>
+                        <span><strong>$18,000 (10%)</strong></span>
+                    </div>
+                    
+                    <div class="budget-item">
+                        <span><strong>Referral Program</strong></span>
+                        <div class="budget-bar">
+                            <div class="budget-fill" style="width: 10%;"></div>
+                        </div>
+                        <span><strong>$18,000 (10%)</strong></span>
+                    </div>
+                </div>
+
+                <table class="channel-table">
+                    <thead>
+                        <tr>
+                            <th>Marketing Channel</th>
+                            <th>Target Audience</th>
+                            <th>Key Messages</th>
+                            <th>Expected CAC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Google Search Ads</strong></td>
+                            <td>High-intent searchers</td>
+                            <td>"Smart home tech support in 30 minutes"</td>
+                            <td>$65</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Facebook/Instagram</strong></td>
+                            <td>Homeowners 35-55</td>
+                            <td>"The friendly tech expert you can trust"</td>
+                            <td>$85</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Content Marketing</strong></td>
+                            <td>DIY tech enthusiasts</td>
+                            <td>"Smart home guides & expert tips"</td>
+                            <td>$45</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email Nurturing</strong></td>
+                            <td>Existing leads</td>
+                            <td>"Preventive maintenance saves money"</td>
+                            <td>$25</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="section">
+                <h3>4. Quarterly Campaign Timeline</h3>
+                
+                <div class="timeline-container">
+                    <div class="quarter">
+                        <div class="quarter-header">Q1: Foundation & Launch (Jan-Mar)</div>
+                        <div class="quarter-content">
+                            <div class="campaign-box">
+                                <div class="campaign-title">Brand Positioning Campaign</div>
+                                <div class="campaign-details">
+                                    Launch "The Friendly Expert" brand identity across all channels. Focus on trust-building and expertise positioning. Budget: $45,000
+                                </div>
+                            </div>
+                            <div class="campaign-box">
+                                <div class="campaign-title">Google Ads Foundation</div>
+                                <div class="campaign-details">
+                                    Target high-intent keywords: "smart home repair," "tech support near me," "home automation help." Budget: $15,750
+                                </div>
+                            </div>
+                            <div class="campaign-box">
+                                <div class="campaign-title">Content Hub Development</div>
+                                <div class="campaign-details">
+                                    Create comprehensive smart home troubleshooting guides, video tutorials, and expert advice blog. Budget: $9,000
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quarter">
+                        <div class="quarter-header">Q2: Scale & Optimize (Apr-Jun)</div>
+                        <div class="quarter-content">
+                            <div class="campaign-box">
+                                <div class="campaign-title">Social Media Expansion</div>
+                                <div class="campaign-details">
+                                    Scale Facebook/Instagram campaigns with video testimonials and before/after case studies. Budget: $11,250
+                                </div>
+                            </div>
+                            <div class="campaign-box">
+                                <div class="campaign-title">Local SEO Domination</div>
+                                <div class="campaign-details">
+                                    Optimize for "tech support [city name]" searches, Google My Business optimization, local directory listings. Budget: $9,000
+                                </div>
+                            </div>
+                            <div class="campaign-box">
+                                <div class="campaign-title">Email Nurture Sequences</div>
+                                <div class="campaign-details">
+                                    Launch automated email sequences for lead nurturing and customer retention. Budget: $4,500
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quarter">
+                        <div class="quarter-header">Q3: Expansion & Innovation (Jul-Sep)</div>
+                        <div class="quarter-content">
+                            <div class="campaign-box">
+                                <div class="campaign-title">Referral Program Launch</div>
+                                <div class="campaign-details">
+                                    Implement customer referral program with $25 credits for successful referrals. Budget: $4,500
+                                </div>
+                            </div>
+                            <div class="campaign-box">
+                                <div class="campaign-title">Video Marketing Push</div>
+                                <div class="campaign-details">
+                                    YouTube channel with weekly tech tips, customer success stories, and behind-the-scenes content. Budget: $9,000
+                                </div>
+                            </div>
+                            <div class="campaign-box">
+                                <div class="campaign-title">Partnership Marketing</div>
+                                <div class="campaign-details">
+                                    Partnerships with smart home retailers, real estate agents, and home insurance companies. Budget: $6,000
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quarter">
+                        <div class="quarter-header">Q4: Optimization & Planning (Oct-Dec)</div>
+                        <div class="quarter-content">
+                            <div class="campaign-box">
+                                <div class="campaign-title">Holiday Season Campaign</div>
+                                <div class="campaign-details">
+                                    Target new smart home device owners during Black Friday/Cyber Monday and holiday seasons. Budget: $15,750
+                                </div>
+                            </div>
+                            <div class="campaign-box">
+                                <div class="campaign-title">Retention & Upsell</div>
+                                <div class="campaign-details">
+                                    Focus on existing customer retention with preventive maintenance packages and premium service tiers. Budget: $4,500
+                                </div>
+                            </div>
+                            <div class="campaign-box">
+                                <div class="campaign-title">Data Analysis & Planning</div>
+                                <div class="campaign-details">
+                                    Comprehensive performance analysis and strategy development for Year 2. Budget: $3,000
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="section">
+                <h3>5. Performance Metrics & KPIs</h3>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-value">2,120</span>
+                        <div class="metric-label">New Customers Acquired<br>(Target for Year 1)</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">$85</span>
+                        <div class="metric-label">Average CAC<br>(32% improvement)</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">65%</span>
+                        <div class="metric-label">Marketing Efficiency Gain<br>(vs. current state)</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">1.2</span>
+                        <div class="metric-label">Payback Period<br>(months)</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">11.8:1</span>
+                        <div class="metric-label">CLV:CAC Ratio<br>(Target)</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">$2.1M</span>
+                        <div class="metric-label">Revenue Impact<br>(Year 1 Projected)</div>
+                    </div>
+                </div>
+
+                <table class="channel-table">
+                    <thead>
+                        <tr>
+                            <th>Channel</th>
+                            <th>Monthly Budget</th>
+                            <th>Target Acquisitions</th>
+                            <th>Conversion Rate</th>
+                            <th>ROI Target</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Google Search</strong></td>
+                            <td>$5,250</td>
+                            <td>81 customers</td>
+                            <td>3.5%</td>
+                            <td>450%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Social Media</strong></td>
+                            <td>$3,750</td>
+                            <td>44 customers</td>
+                            <td>2.1%</td>
+                            <td>380%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Content Marketing</strong></td>
+                            <td>$3,000</td>
+                            <td>67 customers</td>
+                            <td>4.2%</td>
+                            <td>520%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email Marketing</strong></td>
+                            <td>$1,500</td>
+                            <td>60 customers</td>
+                            <td>8.5%</td>
+                            <td>750%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3>6. Success Measurement & Optimization</h3>
+                
+                <div class="roi-projection">
+                    <h4>Monthly Tracking & Reporting</h4>
+                    <ul style="margin-left: 1rem; font-size: 10pt;">
+                        <li><strong>Weekly:</strong> Campaign performance, ad spend optimization, conversion tracking</li>
+                        <li><strong>Monthly:</strong> CAC analysis by channel, CLV cohort analysis, ROI assessment</li>
+                        <li><strong>Quarterly:</strong> ICP refinement, budget reallocation, strategy adjustments</li>
+                        <li><strong>Annually:</strong> Complete strategy review, competitive analysis, planning for Year 2</li>
+                    </ul>
+                </div>
+
+                <p style="font-size: 11pt; text-align: justify; line-height: 1.6; margin-top: 1rem;">
+                    <strong>Optimization Protocol:</strong> All marketing channels will be continuously optimized based on real-time performance data from the Customer Data Platform. Budget allocation will shift monthly based on cost-per-acquisition performance, with successful channels receiving increased investment and underperforming channels being refined or replaced.
+                </p>
+
+                <div class="roi-projection" style="background-color: #e8f6f3; border-left-color: #27ae60;">
+                    <h4 style="color: #27ae60;">Expected Year 1 Outcomes</h4>
+                    <ul style="margin-left: 1rem; font-size: 10pt;">
+                        <li><strong>Customer Acquisition:</strong> 2,120 new high-value customers (vs. 1,440 current trajectory)</li>
+                        <li><strong>Revenue Impact:</strong> $2.1M additional revenue from improved customer quality</li>
+                        <li><strong>Cost Optimization:</strong> 32% reduction in customer acquisition costs</li>
+                        <li><strong>Strategic Position:</strong> Market leader position in premium smart home tech support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

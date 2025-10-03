@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickFix Case Study - Business Transformation Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5;
+            color: #2c3e50;
+            background-color: #ffffff;
+            font-size: 14px;
+        }
+
+        .document {
+            max-width: 8.5in;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 11in;
+        }
+
+        .page {
+            padding: 1in;
+            page-break-after: always;
+        }
+
+        /* Document Header */
+        .doc-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 1rem;
+        }
+
+        .doc-title {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .doc-subtitle {
+            font-size: 16pt;
+            color: #34495e;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .doc-role {
+            font-size: 12pt;
+            color: #7f8c8d;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-content {
+            font-size: 11pt;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* Executive Summary Box */
+        .executive-summary {
+            background: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3498db;
+        }
+
+        .summary-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Metrics Table */
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 10pt;
+        }
+
+        .metrics-table th,
+        .metrics-table td {
+            border: 1px solid #bdc3c7;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .metrics-table th {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+
+        .metrics-table .metric-value {
+            font-weight: bold;
+            font-size: 14pt;
+            color: #e74c3c;
+        }
+
+        /* Problem List */
+        .problem-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .problem-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #e74c3c;
+            background-color: #fdf2f2;
+        }
+
+        .problem-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-description {
+            font-size: 10pt;
+            color: #2c3e50;
+            text-align: justify;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Phase Boxes */
+        .phase-box {
+            border: 1px solid #34495e;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            background-color: #34495e;
+            color: white;
+            padding: 0.5rem;
+            margin: -1rem -1rem 1rem -1rem;
+        }
+
+        .phase-content {
+            font-size: 10pt;
+        }
+
+        .phase-content ul {
+            margin-left: 1rem;
+        }
+
+        .phase-content li {
+            margin-bottom: 0.75rem;
+            text-align: justify;
+        }
+
+        .phase-content strong {
+            color: #2c3e50;
+        }
+
+        /* Results Table */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 10pt;
+        }
+
+        .results-table th,
+        .results-table td {
+            border: 1px solid #2c3e50;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .results-table th {
+            background-color: #27ae60;
+            color: white;
+            font-weight: bold;
+            font-size: 11pt;
+        }
+
+        .results-table .impact-area {
+            font-weight: bold;
+            color: #2c3e50;
+            width: 25%;
+        }
+
+        .results-table .outcome {
+            color: #2c3e50;
+            text-align: justify;
+        }
+
+        /* Page Break */
+        .page-break {
+            page-break-before: always;
+        }
+
+        /* Footer */
+        .doc-footer {
+            position: fixed;
+            bottom: 0.5in;
+            left: 1in;
+            right: 1in;
+            text-align: center;
+            font-size: 9pt;
+            color: #7f8c8d;
+            border-top: 1px solid #bdc3c7;
+            padding-top: 0.5rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            .document {
+                box-shadow: none;
+                margin: 0;
+            }
+            
+            .page {
+                page-break-after: always;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .document {
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            .page {
+                padding: 0.5in;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .doc-title {
+                font-size: 18pt;
+            }
+            
+            .section-header {
+                font-size: 14pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <!-- Page 1 -->
+        <div class="page">
+            <!-- Document Header -->
+            <div class="doc-header">
+                <h1 class="doc-title">QuickFix: The Business Model Reboot</h1>
+                <p class="doc-subtitle">Strategic Business Transformation Case Study</p>
+                <p class="doc-role">Business Consultant / High-Level Business Analyst</p>
+            </div>
+
+            <!-- Executive Summary -->
+            <div class="executive-summary">
+                <h2 class="summary-title">Executive Summary</h2>
+                <p>This case study documents the comprehensive strategic restructuring of QuickFix, a mobile app offering on-demand tech support for smart home devices. Through end-to-end diagnostic analysis and systematic transformation across Strategy, Finance, Operations, and Branding, the engagement delivered measurable improvements in profitability, operational efficiency, and strategic clarity.</p>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="section">
+                <h2 class="section-header">Key Performance Indicators</h2>
+                <table class="metrics-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Impact</th>
+                            <th>Business Area</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="metric-value">40%</td>
+                            <td>Customer Lifetime Value (CLV) Increase</td>
+                            <td>Revenue Optimization</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-value">80%</td>
+                            <td>Data Fragmentation Reduction</td>
+                            <td>Operational Efficiency</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-value">65%</td>
+                            <td>Unprofitable Customers Identified</td>
+                            <td>Strategic Focus</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-value">35%</td>
+                            <td>Marketing Focus on High-Value Segments</td>
+                            <td>Customer Acquisition</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Situation Analysis -->
+            <div class="section">
+                <h2 class="section-header">1. Situation Analysis: A Fumbling Tech Startup</h2>
+                <div class="section-content">
+                    <p>QuickFix, a mobile application offering on-demand technical support for smart home devices, had achieved initial market traction but was experiencing severe operational and strategic challenges. The company was rapidly burning capital without a clear path to profitability, suffering from structural fragmentation and an unsustainable business model.</p>
+                </div>
+
+                <h3 style="font-size: 14pt; font-weight: bold; color: #c0392b; margin: 1.5rem 0 1rem 0;">Core Problems Identified:</h3>
+                
+                <div class="problem-list">
+                    <div class="problem-item">
+                        <h4 class="problem-title">1.1 Fragmentation Fiasco</h4>
+                        <p class="problem-description">
+                            The organization operated with four disconnected software systems (Billing, Customer Support, Marketing Automation, and Backend Operations), creating extensive data silos. This fragmentation made it impossible to accurately track customer lifetime value, diagnose churn root causes, or implement data-driven decision making across the organization.
+                        </p>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <h4 class="problem-title">1.2 Strategy Void</h4>
+                        <p class="problem-description">
+                            Pricing structures were arbitrarily established by copying competitor models without consideration for actual cost-to-serve metrics. The absence of a defined Ideal Customer Profile (ICP) resulted in inefficient marketing spend allocation, acquiring unprofitable user segments that drained operational resources.
+                        </p>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <h4 class="problem-title">1.3 Brand Confusion</h4>
+                        <p class="problem-description">
+                            Inconsistent brand messaging across customer touchpoints lacked a coherent voice and value proposition. This messaging fragmentation eroded customer trust, resulting in poor conversion rates on public-facing channels and reduced customer acquisition efficiency.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2 -->
+        <div class="page page-break">
+
+            <!-- Strategic Action -->
+            <div class="section">
+                <h2 class="section-header">2. Strategic Action: End-to-End Transformation</h2>
+                <div class="section-content">
+                    <p>The engagement involved a comprehensive diagnostic and restructuring effort across four critical business domains: Strategy, Finance, Operations, and Branding. The transformation was executed in two distinct phases to ensure systematic analysis and implementation.</p>
+                </div>
+
+                <div class="two-column">
+                    <div class="phase-box">
+                        <h3 class="phase-title">Phase 1: Diagnosis & Strategic Analysis</h3>
+                        <div class="phase-content">
+                            <ul>
+                                <li><strong>Financial & Unit Economics Analysis:</strong> Developed comprehensive Unit Economics Model utilizing existing billing and support data. Analysis revealed that 65% of the current customer base was operationally unprofitable due to excessive technical support costs and inadequate pricing structures.</li>
+                                <li><strong>Process Modeling & Documentation:</strong> Created detailed "As-Is" end-to-end customer journey mapping using Business Process Model and Notation (BPMN) diagrams. This visualization identified critical data fragmentation points and quantified operational inefficiencies.</li>
+                                <li><strong>Organizational Assessment:</strong> Conducted comprehensive stakeholder interviews and capability assessments. Defined phase-based organizational restructuring plan for 12-month implementation timeline.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="phase-box">
+                        <h3 class="phase-title">Phase 2: Solution Design & Implementation</h3>
+                        <div class="phase-content">
+                            <ul>
+                                <li><strong>Strategic & Pricing Optimization:</strong> Established data-driven Ideal Customer Profile (ICP) segmentation and implemented Value-Based Pricing Model to optimize margin contribution and revenue sustainability.</li>
+                                <li><strong>Systems Architecture Design:</strong> Engineered "To-Be" system architecture blueprint with detailed Requirements Specification Document for Customer Data Platform (CDP) integration, eliminating data silos and enabling real-time analytics.</li>
+                                <li><strong>Brand Strategy & Marketing:</strong> Developed comprehensive "Friendly Expert" brand positioning framework and executed targeted 12-Month Digital Marketing Plan focused on high-value customer acquisition.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3 -->
+        <div class="page page-break">
+
+            <!-- Results & Impact -->
+            <div class="section">
+                <h2 class="section-header">3. Results: Clarity, Efficiency, and Funding Readiness</h2>
+                <div class="section-content">
+                    <p>The strategic transformation deliverables provided QuickFix with a structured foundation and comprehensive data-driven insights necessary for profitable scaling. The implementation of recommended changes resulted in immediate operational improvements and positioned the organization for sustainable growth.</p>
+                </div>
+
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Impact Area</th>
+                            <th>Measurable Result / Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="impact-area">Financial Clarity</td>
+                            <td class="outcome">Profitable Customer Base Identified. Marketing spend was immediately restructured to focus on the top 35% of high-value customer segments, effectively stemming capital burn and improving return on marketing investment.</td>
+                        </tr>
+                        <tr>
+                            <td class="impact-area">Operational Efficiency</td>
+                            <td class="outcome">Data Fragmentation Reduced by 80% (projected). The Customer Data Platform requirements specification paved the way for seamless data flow integration between platforms, enabling real-time profitability tracking and data-driven decision making.</td>
+                        </tr>
+                        <tr>
+                            <td class="impact-area">Revenue Potential</td>
+                            <td class="outcome">Customer Lifetime Value (CLV) Potential Increased by 40% through the immediate adoption of the newly developed Value-Based Pricing Model, optimizing revenue per customer and improving unit economics.</td>
+                        </tr>
+                        <tr>
+                            <td class="impact-area">Strategic Direction</td>
+                            <td class="outcome">The finalized comprehensive strategy, financial modeling framework, and clear implementation roadmap provided the CEO with "North Star" strategic clarity and were instrumental in successfully securing follow-up investor interest and funding.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Deliverables Summary -->
+            <div class="section">
+                <h2 class="section-header">4. Key Deliverables</h2>
+                <div class="section-content">
+                    <ul style="margin-left: 1rem; font-size: 10pt;">
+                        <li><a href="unit-economics-model.html" target="_blank" style="color: #3498db; text-decoration: none;">Unit Economics Model (Excel/Sheets)</a> - Customer profitability analysis framework</li>
+                        <li><a href="bpmn-process-diagrams.html" target="_blank" style="color: #3498db; text-decoration: none;">BPMN Process Diagrams</a> - Current state and future state process mapping</li>
+                        <li><a href="requirements-specification.html" target="_blank" style="color: #3498db; text-decoration: none;">Requirements Specification Document</a> - Customer Data Platform technical specifications</li>
+                        <li><a href="digital-marketing-plan.html" target="_blank" style="color: #3498db; text-decoration: none;">12-Month Digital Marketing Plan</a> - Strategic customer acquisition roadmap</li>
+                        <li><a href="brand-voice-guidelines.html" target="_blank" style="color: #3498db; text-decoration: none;">Brand Voice Guidelines</a> - "The Friendly Expert" positioning framework</li>
+                        <li><a href="value-based-pricing.html" target="_blank" style="color: #3498db; text-decoration: none;">Value-Based Pricing Model</a> - Revenue optimization structure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Footer -->
+        <div class="doc-footer no-print">
+            <p>&copy; 2025 Business Portfolio Case Study | Strategic Business Transformation Consulting</p>
+        </div>
+    </div>
+
+    <script>
+        // Print functionality
+        function printDocument() {
+            window.print();
+        }
+
+        // Add print button functionality if needed
+        document.addEventListener('DOMContentLoaded', () => {
+            // Document is ready - can add any PDF-specific functionality here
+            console.log('QuickFix Case Study Document Loaded');
+        });
+    </script>
+</body>
+</html>

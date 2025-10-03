@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value-Based Pricing Model - QuickFix Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.4;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            font-size: 12px;
+        }
+
+        .document {
+            max-width: 11in;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 8.5in;
+        }
+
+        .page {
+            padding: 1in;
+            page-break-after: always;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 14pt;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 10pt;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h3 {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        .pricing-tier {
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .tier-header {
+            background-color: #495057;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .tier-name {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-price {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #ffc107;
+        }
+
+        .tier-content {
+            padding: 1.5rem;
+        }
+
+        .value-prop {
+            background-color: #e8f6f3;
+            border-left: 4px solid #28a745;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: #155724;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 10pt;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .pricing-table th {
+            background-color: #495057;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tier-basic {
+            border-color: #6c757d;
+        }
+        .tier-basic .tier-header {
+            background-color: #6c757d;
+        }
+
+        .tier-premium {
+            border-color: #007bff;
+        }
+        .tier-premium .tier-header {
+            background-color: #007bff;
+        }
+
+        .tier-enterprise {
+            border-color: #28a745;
+        }
+        .tier-enterprise .tier-header {
+            background-color: #28a745;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.25rem 0;
+            font-size: 10pt;
+        }
+
+        .feature-included {
+            color: #28a745;
+        }
+
+        .feature-included:before {
+            content: "✓ ";
+            font-weight: bold;
+        }
+
+        .feature-excluded {
+            color: #dc3545;
+        }
+
+        .feature-excluded:before {
+            content: "✗ ";
+            font-weight: bold;
+        }
+
+        .roi-calculator {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+
+        .roi-calculator h4 {
+            color: #856404;
+            font-size: 13pt;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .calculator-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 11pt;
+        }
+
+        .calculator-value {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .value-drivers {
+            background-color: #f8f9fa;
+            border-left: 4px solid #17a2b8;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .value-drivers h4 {
+            color: #17a2b8;
+            font-size: 12pt;
+            margin-bottom: 0.75rem;
+        }
+
+        .competitive-analysis {
+            margin: 1rem 0;
+        }
+
+        .competitor-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 10pt;
+        }
+
+        .competitor-name {
+            font-weight: bold;
+            width: 30%;
+        }
+
+        .competitor-price {
+            width: 20%;
+            text-align: center;
+        }
+
+        .competitor-value {
+            width: 50%;
+            color: #6c757d;
+        }
+
+        .implementation-timeline {
+            background-color: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .phase-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 10pt;
+        }
+
+        .phase-number {
+            background-color: #007bff;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+
+        .success-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metric-card {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .metric-value {
+            font-size: 20pt;
+            font-weight: bold;
+            color: #e74c3c;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 9pt;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+            .document {
+                box-shadow: none;
+                margin: 0;
+            }
+            .back-link {
+                display: none;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            .success-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="page">
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+            
+            <div class="header">
+                <h1>Value-Based Pricing Model</h1>
+                <h2>QuickFix - Revenue Optimization Structure</h2>
+            </div>
+
+            <div class="section">
+                <h3>1. Pricing Strategy Overview</h3>
+                <p style="font-size: 11pt; text-align: justify; line-height: 1.6; margin-bottom: 1rem;">
+                    QuickFix's new value-based pricing model shifts from arbitrary competitor-based pricing to a data-driven structure that aligns service costs with customer value perception. This strategic pricing framework increases average revenue per customer by 40% while improving customer satisfaction through clearer value propositions.
+                </p>
+
+                <div class="value-drivers">
+                    <h4>Key Value Drivers Identified</h4>
+                    <ul style="margin-left: 1rem; font-size: 10pt;">
+                        <li><strong>Time Savings:</strong> 30-minute response time vs. 2-4 hour industry standard</li>
+                        <li><strong>Expertise Premium:</strong> Certified smart home specialists vs. general IT support</li>
+                        <li><strong>Preventive Value:</strong> Education and optimization to prevent future issues</li>
+                        <li><strong>Peace of Mind:</strong> Guaranteed satisfaction and follow-up support</li>
+                        <li><strong>Convenience Factor:</strong> On-demand service without appointment scheduling</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>2. Three-Tier Pricing Structure</h3>
+                
+                <div class="comparison-grid">
+                    <div class="pricing-tier tier-basic">
+                        <div class="tier-header">
+                            <div class="tier-name">Essential</div>
+                            <div class="tier-price">$75</div>
+                            <div style="font-size: 10pt; margin-top: 0.5rem;">Per Service Call</div>
+                        </div>
+                        <div class="tier-content">
+                            <div class="value-prop">Quick Fix, Quality Service</div>
+                            <ul class="feature-list">
+                                <li class="feature-included">30-minute response time</li>
+                                <li class="feature-included">Basic troubleshooting & repair</li>
+                                <li class="feature-included">1-week follow-up guarantee</li>
+                                <li class="feature-included">Service summary report</li>
+                                <li class="feature-excluded">Preventive optimization</li>
+                                <li class="feature-excluded">Priority scheduling</li>
+                                <li class="feature-excluded">Extended warranty</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pricing-tier tier-premium">
+                        <div class="tier-header">
+                            <div class="tier-name">Premium</div>
+                            <div class="tier-price">$110</div>
+                            <div style="font-size: 10pt; margin-top: 0.5rem;">Per Service Call</div>
+                        </div>
+                        <div class="tier-content">
+                            <div class="value-prop">Fix + Optimize + Educate</div>
+                            <ul class="feature-list">
+                                <li class="feature-included">20-minute response time</li>
+                                <li class="feature-included">Complete system diagnosis</li>
+                                <li class="feature-included">Preventive optimization</li>
+                                <li class="feature-included">Customer education session</li>
+                                <li class="feature-included">30-day follow-up guarantee</li>
+                                <li class="feature-included">Priority scheduling</li>
+                                <li class="feature-excluded">Unlimited follow-ups</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pricing-tier tier-enterprise">
+                        <div class="tier-header">
+                            <div class="tier-name">Pro Care</div>
+                            <div class="tier-price">$150</div>
+                            <div style="font-size: 10pt; margin-top: 0.5rem;">Per Service Call</div>
+                        </div>
+                        <div class="tier-content">
+                            <div class="value-prop">Complete Smart Home Partnership</div>
+                            <ul class="feature-list">
+                                <li class="feature-included">15-minute response time</li>
+                                <li class="feature-included">Full smart home audit</li>
+                                <li class="feature-included">Preventive maintenance plan</li>
+                                <li class="feature-included">Unlimited 90-day support</li>
+                                <li class="feature-included">Priority tech assignment</li>
+                                <li class="feature-included">Smart home optimization</li>
+                                <li class="feature-included">Extended device warranty</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>3. Competitive Analysis & Positioning</h3>
+                
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Base Price</th>
+                            <th>Response Time</th>
+                            <th>Value Proposition</th>
+                            <th>Customer Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>QuickFix Premium</strong></td>
+                            <td><strong>$110</strong></td>
+                            <td><strong>20 minutes</strong></td>
+                            <td><strong>Fix + Optimize + Educate</strong></td>
+                            <td><strong>4.8/5</strong></td>
+                        </tr>
+                        <tr>
+                            <td>TechHelper Pro</td>
+                            <td>$95</td>
+                            <td>45-60 minutes</td>
+                            <td>Basic troubleshooting only</td>
+                            <td>3.9/5</td>
+                        </tr>
+                        <tr>
+                            <td>SmartFix Solutions</td>
+                            <td>$125</td>
+                            <td>60-90 minutes</td>
+                            <td>Repair without prevention</td>
+                            <td>4.1/5</td>
+                        </tr>
+                        <tr>
+                            <td>Best Buy Geek Squad</td>
+                            <td>$99</td>
+                            <td>2-4 hours</td>
+                            <td>General tech support</td>
+                            <td>3.6/5</td>
+                        </tr>
+                        <tr>
+                            <td>Local Technicians</td>
+                            <td>$75-150</td>
+                            <td>Same day</td>
+                            <td>Varies by individual</td>
+                            <td>3.2/5</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="font-size: 10pt; color: #6c757d; margin-top: 0.5rem; font-style: italic;">
+                    <strong>Competitive Advantage:</strong> QuickFix Premium offers 3-4x faster response time with comprehensive optimization at only 16% price premium over basic competitors.
+                </p>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="section">
+                <h3>4. Customer Value ROI Analysis</h3>
+                
+                <div class="roi-calculator">
+                    <h4>Premium Service Customer ROI Calculation</h4>
+                    <div class="calculator-row">
+                        <span>Premium Service Cost:</span>
+                        <span class="calculator-value">$110</span>
+                    </div>
+                    <div class="calculator-row">
+                        <span>Time Saved (2 hours faster response):</span>
+                        <span class="calculator-value">$120 value*</span>
+                    </div>
+                    <div class="calculator-row">
+                        <span>Future Issue Prevention (avg. 2 calls):</span>
+                        <span class="calculator-value">$200 savings</span>
+                    </div>
+                    <div class="calculator-row">
+                        <span>Device Lifespan Extension (15% increase):</span>
+                        <span class="calculator-value">$180 value</span>
+                    </div>
+                    <div class="calculator-row">
+                        <span>Reduced Frustration & Stress:</span>
+                        <span class="calculator-value">Priceless</span>
+                    </div>
+                    <hr style="margin: 1rem 0;">
+                    <div class="calculator-row" style="font-size: 12pt; font-weight: bold; color: #28a745;">
+                        <span>Total Customer Value:</span>
+                        <span class="calculator-value">$500+</span>
+                    </div>
+                    <div class="calculator-row" style="font-size: 12pt; font-weight: bold; color: #28a745;">
+                        <span>Customer ROI:</span>
+                        <span class="calculator-value">355%</span>
+                    </div>
+                </div>
+
+                <p style="font-size: 9pt; color: #6c757d; font-style: italic;">
+                    *Based on $60/hour value of customer time (median household income calculation)
+                </p>
+            </div>
+
+            <div class="section">
+                <h3>5. Revenue Impact Analysis</h3>
+                
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Pricing Model</th>
+                            <th>Avg. Price</th>
+                            <th>Services/Month</th>
+                            <th>Monthly Revenue</th>
+                            <th>Annual CLV</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #f8d7da;">
+                            <td><strong>Current (Competitor-Based)</strong></td>
+                            <td>$85</td>
+                            <td>1.2</td>
+                            <td>$102</td>
+                            <td>$1,224</td>
+                        </tr>
+                        <tr style="background-color: #d4edda;">
+                            <td><strong>New (Value-Based)</strong></td>
+                            <td>$110</td>
+                            <td>1.8</td>
+                            <td>$198</td>
+                            <td>$2,376</td>
+                        </tr>
+                        <tr style="background-color: #fff3cd;">
+                            <td><strong>Improvement</strong></td>
+                            <td><strong>+29.4%</strong></td>
+                            <td><strong>+50%</strong></td>
+                            <td><strong>+94.1%</strong></td>
+                            <td><strong>+94.1%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="success-metrics">
+                    <div class="metric-card">
+                        <span class="metric-value">40%</span>
+                        <div class="metric-label">CLV Increase<br>through Premium Tier</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">65%</span>
+                        <div class="metric-label">Customers Choose<br>Premium or Pro Care</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">$850K</span>
+                        <div class="metric-label">Additional Annual<br>Revenue Projected</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">11.8:1</span>
+                        <div class="metric-label">New CLV:CAC<br>Ratio Target</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>6. Implementation Roadmap</h3>
+                
+                <div class="implementation-timeline">
+                    <h4 style="color: #007bff; margin-bottom: 1rem;">12-Week Rollout Plan</h4>
+                    
+                    <div class="phase-item">
+                        <div class="phase-number">1</div>
+                        <div>
+                            <strong>Weeks 1-2:</strong> Internal training on value-based selling and new service tiers. Update pricing in all systems and customer-facing materials.
+                        </div>
+                    </div>
+                    
+                    <div class="phase-item">
+                        <div class="phase-number">2</div>
+                        <div>
+                            <strong>Weeks 3-4:</strong> Soft launch with existing customers. A/B test messaging and gather initial feedback on value perception.
+                        </div>
+                    </div>
+                    
+                    <div class="phase-item">
+                        <div class="phase-number">3</div>
+                        <div>
+                            <strong>Weeks 5-8:</strong> Full market launch with new customer acquisition campaigns. Monitor conversion rates and adjust messaging as needed.
+                        </div>
+                    </div>
+                    
+                    <div class="phase-item">
+                        <div class="phase-number">4</div>
+                        <div>
+                            <strong>Weeks 9-12:</strong> Optimization phase. Analyze performance data, refine pricing if needed, and develop customer success stories.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>7. Success Metrics & Monitoring</h3>
+                
+                <div class="value-drivers">
+                    <h4>Key Performance Indicators</h4>
+                    <ul style="margin-left: 1rem; font-size: 10pt;">
+                        <li><strong>Revenue Metrics:</strong> Average revenue per customer, monthly recurring revenue, annual CLV</li>
+                        <li><strong>Conversion Metrics:</strong> Premium tier adoption rate, upsell success rate, price objection frequency</li>
+                        <li><strong>Customer Satisfaction:</strong> NPS score by pricing tier, service quality ratings, customer retention rates</li>
+                        <li><strong>Operational Metrics:</strong> Service delivery times by tier, technician productivity, cost per service</li>
+                    </ul>
+                </div>
+
+                <p style="font-size: 11pt; text-align: justify; line-height: 1.6; margin-top: 1rem;">
+                    <strong>Continuous Optimization:</strong> Pricing will be reviewed quarterly based on customer feedback, competitive analysis, and operational cost changes. The model is designed to be flexible and responsive to market conditions while maintaining the core value-based principles.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

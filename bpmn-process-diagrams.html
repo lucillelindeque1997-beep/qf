@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPMN Process Diagrams - QuickFix Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.4;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            font-size: 12px;
+        }
+
+        .document {
+            max-width: 11in;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 8.5in;
+        }
+
+        .page {
+            padding: 1in;
+            page-break-after: always;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 14pt;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            text-decoration: none;
+            color: #3498db;
+            font-size: 10pt;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h3 {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        .process-diagram {
+            border: 2px solid #34495e;
+            padding: 1rem;
+            margin: 1rem 0;
+            background-color: #fafafa;
+            min-height: 300px;
+            position: relative;
+        }
+
+        .process-title {
+            background-color: #34495e;
+            color: white;
+            padding: 0.5rem;
+            margin: -1rem -1rem 1rem -1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .swim-lane {
+            border: 1px solid #7f8c8d;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background-color: white;
+        }
+
+        .lane-header {
+            background-color: #ecf0f1;
+            padding: 0.25rem 0.5rem;
+            font-weight: bold;
+            font-size: 10pt;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        .process-step {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 0.5rem;
+            margin: 0.25rem;
+            border-radius: 4px;
+            font-size: 9pt;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .decision-step {
+            background-color: #f39c12;
+            transform: rotate(45deg);
+            width: 60px;
+            height: 60px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem;
+        }
+
+        .decision-text {
+            transform: rotate(-45deg);
+            font-size: 8pt;
+            text-align: center;
+        }
+
+        .problem-step {
+            background-color: #e74c3c;
+        }
+
+        .solution-step {
+            background-color: #27ae60;
+        }
+
+        .data-flow {
+            font-size: 8pt;
+            color: #7f8c8d;
+            font-style: italic;
+            text-align: center;
+            margin: 0.25rem 0;
+        }
+
+        .arrow {
+            display: inline-block;
+            margin: 0 0.5rem;
+            color: #34495e;
+            font-weight: bold;
+        }
+
+        .legend {
+            background-color: #ecf0f1;
+            padding: 1rem;
+            border-left: 4px solid #3498db;
+            margin: 1rem 0;
+        }
+
+        .legend h4 {
+            font-size: 11pt;
+            margin-bottom: 0.5rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.25rem;
+            font-size: 9pt;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 15px;
+            margin-right: 0.5rem;
+            border-radius: 3px;
+        }
+
+        .issues-list {
+            background-color: #fdf2f2;
+            border-left: 4px solid #e74c3c;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .issues-list h4 {
+            color: #c0392b;
+            font-size: 11pt;
+            margin-bottom: 0.5rem;
+        }
+
+        .issues-list ul {
+            margin-left: 1rem;
+        }
+
+        .issues-list li {
+            font-size: 9pt;
+            margin-bottom: 0.25rem;
+            color: #2c3e50;
+        }
+
+        .benefits-list {
+            background-color: #f0fff4;
+            border-left: 4px solid #27ae60;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .benefits-list h4 {
+            color: #27ae60;
+            font-size: 11pt;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefits-list ul {
+            margin-left: 1rem;
+        }
+
+        .benefits-list li {
+            font-size: 9pt;
+            margin-bottom: 0.25rem;
+            color: #2c3e50;
+        }
+
+        .metrics-box {
+            background-color: #e8f6f3;
+            border: 1px solid #27ae60;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .metrics-box h4 {
+            color: #27ae60;
+            font-size: 12pt;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-item {
+            display: inline-block;
+            margin: 0.5rem 1rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .metric-label {
+            font-size: 9pt;
+            color: #2c3e50;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+            .document {
+                box-shadow: none;
+                margin: 0;
+            }
+            .back-link {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document">
+        <div class="page">
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+            
+            <div class="header">
+                <h1>BPMN Process Diagrams</h1>
+                <h2>QuickFix - Current State vs Future State Process Mapping</h2>
+            </div>
+
+            <div class="legend">
+                <h4>Process Notation Legend</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #3498db;"></div>
+                    <span>Standard Process Step</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #e74c3c;"></div>
+                    <span>Problem/Bottleneck Point</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #27ae60;"></div>
+                    <span>Optimized Solution Step</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #f39c12;"></div>
+                    <span>Decision Point</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Current State (AS-IS) - Customer Onboarding & Service Process</h3>
+                
+                <div class="process-diagram">
+                    <div class="process-title">AS-IS: Fragmented Customer Journey</div>
+                    
+                    <div class="swim-lane">
+                        <div class="lane-header">Marketing System</div>
+                        <div class="process-step">Lead Capture</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step problem-step">Manual Export</div>
+                        <div class="data-flow">CSV Export → Email</div>
+                    </div>
+
+                    <div class="swim-lane">
+                        <div class="lane-header">Billing System</div>
+                        <div class="process-step problem-step">Manual Import</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step">Account Setup</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step problem-step">Pricing Lookup</div>
+                        <div class="data-flow">No cost data available</div>
+                    </div>
+
+                    <div class="swim-lane">
+                        <div class="lane-header">Support System</div>
+                        <div class="process-step problem-step">Service Request</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step problem-step">No Customer History</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step">Service Delivery</div>
+                        <div class="data-flow">Isolated ticket system</div>
+                    </div>
+
+                    <div class="swim-lane">
+                        <div class="lane-header">Backend Operations</div>
+                        <div class="process-step problem-step">Manual Reporting</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step problem-step">Data Reconciliation</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step problem-step">Delayed Analytics</div>
+                        <div class="data-flow">Weekly manual reports</div>
+                    </div>
+                </div>
+
+                <div class="issues-list">
+                    <h4>Critical Issues Identified</h4>
+                    <ul>
+                        <li><strong>Data Silos:</strong> 4 disconnected systems requiring manual data transfer</li>
+                        <li><strong>No Real-Time Visibility:</strong> Customer profitability unknown until weekly reports</li>
+                        <li><strong>Manual Bottlenecks:</strong> 6+ manual handoff points creating delays and errors</li>
+                        <li><strong>Inconsistent Pricing:</strong> No access to cost-to-serve data during pricing decisions</li>
+                        <li><strong>Poor Customer Experience:</strong> Support agents lack customer history and context</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="section">
+                <h3>Future State (TO-BE) - Integrated Customer Data Platform</h3>
+                
+                <div class="process-diagram">
+                    <div class="process-title">TO-BE: Unified Customer Journey</div>
+                    
+                    <div class="swim-lane">
+                        <div class="lane-header">Customer Data Platform (CDP)</div>
+                        <div class="process-step solution-step">Lead Capture</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Auto Qualification</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">ICP Matching</div>
+                        <div class="data-flow">Real-time API integration</div>
+                    </div>
+
+                    <div class="swim-lane">
+                        <div class="lane-header">Unified Billing & Pricing</div>
+                        <div class="process-step solution-step">Auto Account</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Value-Based Pricing</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Profitability Check</div>
+                        <div class="data-flow">Instant cost-to-serve calculation</div>
+                    </div>
+
+                    <div class="swim-lane">
+                        <div class="lane-header">Intelligent Support</div>
+                        <div class="process-step solution-step">Service Request</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Full Customer 360</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Optimized Service</div>
+                        <div class="data-flow">Complete customer context available</div>
+                    </div>
+
+                    <div class="swim-lane">
+                        <div class="lane-header">Real-Time Analytics</div>
+                        <div class="process-step solution-step">Live Dashboard</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Auto Reporting</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Predictive Insights</div>
+                        <div class="data-flow">Real-time data streaming</div>
+                    </div>
+                </div>
+
+                <div class="benefits-list">
+                    <h4>Transformation Benefits</h4>
+                    <ul>
+                        <li><strong>Unified Data Flow:</strong> Single source of truth eliminates manual data transfers</li>
+                        <li><strong>Real-Time Profitability:</strong> Instant visibility into customer value and service costs</li>
+                        <li><strong>Automated Workflows:</strong> Elimination of 6 manual handoff points</li>
+                        <li><strong>Dynamic Pricing:</strong> Cost-to-serve data enables value-based pricing decisions</li>
+                        <li><strong>Enhanced Customer Experience:</strong> 360-degree customer view for support agents</li>
+                        <li><strong>Predictive Analytics:</strong> Churn prediction and upsell opportunity identification</li>
+                    </ul>
+                </div>
+
+                <div class="metrics-box">
+                    <h4>Projected Operational Improvements</h4>
+                    <div class="metric-item">
+                        <div class="metric-value">80%</div>
+                        <div class="metric-label">Data Fragmentation Reduction</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">65%</div>
+                        <div class="metric-label">Manual Process Elimination</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">90%</div>
+                        <div class="metric-label">Faster Customer Insights</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">40%</div>
+                        <div class="metric-label">Support Efficiency Gain</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Implementation Roadmap</h3>
+                
+                <div class="process-diagram">
+                    <div class="process-title">12-Month CDP Implementation Timeline</div>
+                    
+                    <div class="swim-lane">
+                        <div class="lane-header">Phase 1: Foundation (Months 1-3)</div>
+                        <div class="process-step solution-step">CDP Platform Selection</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Data Architecture Design</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">API Integration Planning</div>
+                    </div>
+
+                    <div class="swim-lane">
+                        <div class="lane-header">Phase 2: Integration (Months 4-8)</div>
+                        <div class="process-step solution-step">Marketing Integration</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Billing System Connection</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Support System Unification</div>
+                    </div>
+
+                    <div class="swim-lane">
+                        <div class="lane-header">Phase 3: Optimization (Months 9-12)</div>
+                        <div class="process-step solution-step">Analytics Dashboard</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Predictive Models</div>
+                        <span class="arrow">→</span>
+                        <div class="process-step solution-step">Full Automation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
